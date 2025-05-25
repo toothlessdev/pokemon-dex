@@ -1,8 +1,8 @@
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Styles from "./PokemonCard.styled";
 
-export const PokemonCard = ({ id, name, image, state, dispatch }) => {
+export const PokemonCard = memo(({ id, name, image, isSelected, dispatch }) => {
     const navigate = useNavigate();
 
     const onAdd = useCallback(
@@ -26,9 +26,9 @@ export const PokemonCard = ({ id, name, image, state, dispatch }) => {
                 <Styles.Index>No. {Number(id).toString().padStart(3, "0")}</Styles.Index>
             </Styles.Info>
 
-            <Styles.Button onClick={onAdd}>
-                {state.selectedPokemonIds.includes(id) ? "삭제" : "추가"}
-            </Styles.Button>
+            <Styles.Button onClick={onAdd}>{isSelected ? "삭제" : "추가"}</Styles.Button>
         </Styles.Container>
     );
-};
+});
+
+PokemonCard.displayName = "PokemonCard";

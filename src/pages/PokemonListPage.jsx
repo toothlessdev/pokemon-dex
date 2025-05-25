@@ -13,13 +13,15 @@ export const PokemonListPage = () => {
 
             <Styles.PokemonList>
                 {pokemonData.map((pokemon) => {
+                    const isSelected = state.selectedPokemonIds.includes(pokemon.id);
+
                     return (
                         <PokemonCard
                             key={pokemon.id}
                             id={pokemon.id}
                             name={pokemon.korean_name}
                             image={pokemon.img_url}
-                            state={state}
+                            isSelected={isSelected}
                             dispatch={dispatch}
                         />
                     );

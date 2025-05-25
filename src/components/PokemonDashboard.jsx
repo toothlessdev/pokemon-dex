@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonCardPlaceholder } from "@/components/PokemonCardPlaceholder";
 import * as Styles from "./PokemonDashboard.styled";
 import { pokemonData } from "@/__mocks__";
 
-export const PokemonDashboard = ({ state, dispatch }) => {
+export const PokemonDashboard = memo(({ state, dispatch }) => {
     return (
         <Styles.Container>
             <Styles.Content>
@@ -14,7 +15,7 @@ export const PokemonDashboard = ({ state, dispatch }) => {
                             id={id}
                             name={pokemonData[id - 1].korean_name}
                             image={pokemonData[id - 1].img_url}
-                            state={state}
+                            isSelected={true}
                             dispatch={dispatch}
                         />
                     );
@@ -25,4 +26,6 @@ export const PokemonDashboard = ({ state, dispatch }) => {
             </Styles.Content>
         </Styles.Container>
     );
-};
+});
+
+PokemonDashboard.displayName = "PokemonDashboard";

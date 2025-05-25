@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useCallback, useReducer } from "react";
 
 export const POKEMON_LIMIT = 6;
 
@@ -38,20 +38,24 @@ const reducer = (state, action) => {
 export const usePokemon = () => {
     const [state, _dispatch] = useReducer(reducer, initialState);
 
-    const dispatch = (action) => {
-        const { id } = action.payload || {};
+    const dispatch = useCallback(
+        (action) => {
+            const { id } = action.payload || {};
 
-        if (action.type === "TOGGLE" && !state.selectedPokemonIds.includes(id)) {
-            if (state.selectedPokemonIds.length >= POKEMON_LIMIT)
-                throw new Error(`포켓몬은 ${POKEMON_LIMIT}마리까지만 선택할 수 있습니다!`);
-        }
-        if (action.type === "APPEND") {
-            if (state.selectedPokemonIds.length >= POKEMON_LIMIT)
-                throw new Error(`포켓몬은 ${POKEMON_LIMIT}마리까지만 선택할 수 있습니다!`);
-        }
+            if (action.type === "TOGGLE" && !state.selectedPokemonIds.includes(id)) {
+                if (state.selectedPokemonIds.length >= POKEMON_LIMIT)
+                    throw new Error(`포켓몬은 ${POKEMON_LIMIT}마리까지만 선택할 수 있습니다!`);
+            }
+            if (action.type === "APPEND") {
+                if (state.selectedPokemonIds.length >= POKEMON_LIMIT)
+                    throw new Error(`포켓몬은 ${POKEMON_LIMIT}마리까지만 선택할 수 있습니다!`);
+            }
 
-        _dispatch(action);
-    };
+            _dispatch(action);
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [_dispatch],
+    );
 
     return {
         state,
