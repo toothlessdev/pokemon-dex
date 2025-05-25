@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
     createBrowserRouter,
     createRoutesFromChildren,
@@ -10,11 +11,13 @@ import { PokemonDetailPage } from "@/pages/PokemonDetailPage";
 import { PokemonListPage } from "@/pages/PokemonListPage";
 
 const routes = createRoutesFromChildren(
-    <Route path="/" element={<RootLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dex" element={<PokemonListPage />} />
-        <Route path="/dex/:id" element={<PokemonDetailPage />} />
-    </Route>,
+    <Fragment>
+        <Route path="/" element={<RootLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/dex" element={<PokemonListPage />} />
+            <Route path="/dex/:id" element={<PokemonDetailPage />} />
+        </Route>
+    </Fragment>,
 );
 
 export const router = createBrowserRouter(routes);
