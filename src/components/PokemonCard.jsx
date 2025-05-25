@@ -1,9 +1,12 @@
 import { memo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Styles from "./PokemonCard.styled";
+import { usePokemonContext } from "@/contexts/PokemonContext";
 
-export const PokemonCard = memo(({ id, name, image, isSelected, dispatch }) => {
+export const PokemonCard = memo(({ id, name, image, isSelected }) => {
     const navigate = useNavigate();
+
+    const { dispatch } = usePokemonContext();
 
     const onAdd = useCallback(
         (e) => {
