@@ -1,0 +1,16 @@
+{
+    "printWidth": 100,
+    "tabWidth": 4,
+
+    "importOrder": [
+        "^next",
+        "<THIRD_PARTY_MODULES>",
+
+        "^(@/app)(.*)$",
+        "^(@/components)(.*)$",
+        "^(@/hooks)(.*)$",
+
+        "^(.*)/(.*)$"
+    ],
+    "plugins": ["@trivago/prettier-plugin-sort-imports"]
+}
