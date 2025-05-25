@@ -1,27 +1,33 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext } from "react";
 import { usePokemon } from "@/hooks/usePokemon";
 
-export const PokemonContext = createContext(null);
+export const PokemonStateContext = createContext(null);
+export const PokemonDispatchContext = createContext(null);
 
 export const PokemonContextProvider = ({ children }) => {
     const { state, dispatch } = usePokemon();
 
     return (
-        <PokemonContext.Provider
-            value={{
-                state,
-                dispatch,
-            }}
-        >
-            {children}
-        </PokemonContext.Provider>
+        <PokemonStateContext.Provider value={state}>
+            <PokemonDispatchContext.Provider value={dispatch}>
+                {children}
+            </PokemonDispatchContext.Provider>
+        </PokemonStateContext.Provider>
     );
 };
 
-export const usePokemonContext = () => {
-    const context = useContext(PokemonContext);
-    if (!context)
-        throw new Error("usePokemonContext 는 PokemonContextProvider 내부에서 호출해야 합니다.");
+export const usePokemonState = () => {
+    const context = useContext(PokemonStateContext);
+    if (!context) {
+        throw new Error("usePokemonState는 PokemonContextProvider 내부에서 호출해야 합니다.");
+    }
+    return context;
+};
 
-    return useMemo(() => context, [context]);
+export const usePokemonDispatch = () => {
+    const context = useContext(PokemonDispatchContext);
+    if (!context) {
+        throw new Error("usePokemonDispatch는 PokemonContextProvider 내부에서 호출해야 합니다.");
+    }
+    return context;
 };

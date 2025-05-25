@@ -3,10 +3,10 @@ import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonCardPlaceholder } from "@/components/PokemonCardPlaceholder";
 import * as Styles from "./PokemonDashboard.styled";
 import { pokemonData } from "@/__mocks__";
-import { usePokemonContext } from "@/contexts/PokemonContext";
+import { usePokemonState } from "@/contexts/PokemonContext";
 
 export const PokemonDashboard = memo(() => {
-    const { state } = usePokemonContext();
+    const state = usePokemonState();
 
     return (
         <Styles.Container>

@@ -2,10 +2,11 @@ import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonDashboard } from "@/components/PokemonDashboard";
 import * as Styles from "./PokemonListPage.styled";
 import { pokemonData } from "@/__mocks__";
-import { usePokemonContext } from "@/contexts/PokemonContext";
+import { usePokemonDispatch, usePokemonState } from "@/contexts/PokemonContext";
 
 export const PokemonListPage = () => {
-    const { state, dispatch } = usePokemonContext();
+    const state = usePokemonState();
+    const dispatch = usePokemonDispatch();
 
     return (
         <Styles.PageContainer>
