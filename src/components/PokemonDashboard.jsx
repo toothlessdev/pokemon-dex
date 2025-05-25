@@ -3,8 +3,11 @@ import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonCardPlaceholder } from "@/components/PokemonCardPlaceholder";
 import * as Styles from "./PokemonDashboard.styled";
 import { pokemonData } from "@/__mocks__";
+import { usePokemonState } from "@/contexts/PokemonContext";
 
-export const PokemonDashboard = memo(({ state, dispatch }) => {
+export const PokemonDashboard = memo(() => {
+    const state = usePokemonState();
+
     return (
         <Styles.Container>
             <Styles.Content>
@@ -16,7 +19,6 @@ export const PokemonDashboard = memo(({ state, dispatch }) => {
                             name={pokemonData[id - 1].korean_name}
                             image={pokemonData[id - 1].img_url}
                             isSelected={true}
-                            dispatch={dispatch}
                         />
                     );
                 })}

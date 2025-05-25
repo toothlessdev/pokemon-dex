@@ -1,15 +1,16 @@
 import { PokemonCard } from "@/components/PokemonCard";
 import { PokemonDashboard } from "@/components/PokemonDashboard";
-import { usePokemon } from "@/hooks/usePokemon";
 import * as Styles from "./PokemonListPage.styled";
 import { pokemonData } from "@/__mocks__";
+import { usePokemonDispatch, usePokemonState } from "@/contexts/PokemonContext";
 
 export const PokemonListPage = () => {
-    const { state, dispatch } = usePokemon();
+    const state = usePokemonState();
+    const dispatch = usePokemonDispatch();
 
     return (
         <Styles.PageContainer>
-            <PokemonDashboard state={state} dispatch={dispatch} />
+            <PokemonDashboard />
 
             <Styles.PokemonList>
                 {pokemonData.map((pokemon) => {
